@@ -14,7 +14,10 @@ dependencies = ["lightgbm>=4.5.0, <5",
                 "cffi>=1.17.1, <2",
                 "scipy>=1.14.1, <2",
                 "matplotlib>=3.9.2, <4",
-                "databricks-feature-engineering>=0.6, <1"]
+                "databricks-feature-engineering>=0.6, <1",
+                "polars==1.9.0",
+                "statsforecast==1.7.8",
+                "mlforecast==0.13.5"]
 
 [project.optional-dependencies]
 dev = ["databricks-connect>=15.4.1, <16",

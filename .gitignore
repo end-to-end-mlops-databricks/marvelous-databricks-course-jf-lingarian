@@ -95,3 +95,9 @@ dmypy.json
 # VS code configuration
 .vscode
 .history
+
+# testing file
+testing.ipynb
+
+# original dataset
+data/original/
