@@ -21,7 +21,7 @@ jobs:
         run: uv sync
 
       - name: Install pre-commit
-        run: uv pip install pre-commit
+        run: pip install pre-commit
 
       - name: Run pre-commit checks
         run: pre-commit run --all-files
