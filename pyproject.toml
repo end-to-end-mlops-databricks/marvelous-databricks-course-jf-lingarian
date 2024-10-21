@@ -18,7 +18,9 @@ dependencies = [
     "databricks-feature-engineering>=0.6,<1",
     "polars==1.9.0",
     "statsforecast==1.7.8",
-    "mlforecast==0.13.5"
+    "mlforecast==0.13.5",
+    "black==24.10.0",
+    "isort==5.13.2",
 ]
 
 [project.optional-dependencies]
