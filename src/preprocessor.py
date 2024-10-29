@@ -2,7 +2,10 @@ import datetime as dt
 import os
 from typing import List, Optional
 
+import pandas as pd
 import polars as pl
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import current_timestamp, to_utc_timestamp
 
 
 class DataProcessor:
@@ -147,3 +150,25 @@ class DataProcessor:
                 )
 
             print(f"Data for file {new_data_file_name} has been successfully merged with the preprocessed data")
+
+    def save_to_catalog(self, df_processed: pd.DataFrame, spark: SparkSession):
+        """
+        Save the processed DataFrame into a Databricks table with a timestamp and enable Change Data Feed.
+
+        Parameters:
+        df_processed (pd.DataFrame): The processed DataFrame to be saved.
+        spark (SparkSession): The Spark session to use for saving the DataFrame.
+        """
+
+        df_processed_with_timestamp = spark.createDataFrame(df_processed).withColumn(
+            "update_timestamp_utc", to_utc_timestamp(current_timestamp(), "UTC")
+        )
+
+        df_processed_with_timestamp.write.mode("append").saveAsTable(
+            f"{self.config.catalog_name}.{self.config.schema_name}.processed_data"
+        )
+
+        spark.sql(
+            f"ALTER TABLE {self.config.catalog_name}.{self.config.schema_name}.processed_data "
+            "SET TBLPROPERTIES (delta.enableChangeDataFeed = true);"
+        )
