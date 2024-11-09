@@ -8,9 +8,7 @@ mlflow.set_experiment(experiment_name="/Shared/vn1-forecasting")
 mlflow.set_experiment_tags({"repository_name": "vn1-forecasting"})
 
 # Search for experiments with the specified tag
-experiments = mlflow.search_experiments(
-    filter_string="tags.repository_name='vn1-forecasting'"
-)
+experiments = mlflow.search_experiments(filter_string="tags.repository_name='vn1-forecasting'")
 print(experiments)
 
 # Save experiment details to a JSON file
