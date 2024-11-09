@@ -1,0 +1,6 @@
+artifact_location: file:///c:/Users/jakub/OneDrive/Pulpit/DataScience/End-to-end%20MLOps%20with%20Databricks/marvelous-databricks-course-jf-lingarian-1/mlruns/460022569191147653
+creation_time: 1731143857582
+experiment_id: '460022569191147653'
+last_update_time: 1731143857582
+lifecycle_stage: active
+name: mlforecast
