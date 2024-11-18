@@ -103,3 +103,6 @@ testing.ipynb
 data/original/
 
 .databricks
+
+# mlflow
+.mlruns
