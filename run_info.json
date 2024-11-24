@@ -1,0 +1,55 @@
+{
+    "info": {
+        "artifact_uri": "dbfs:/databricks/mlflow-tracking/893771203915828/afa099dd1b2a4c4ab703f696b5c21a73/artifacts",
+        "end_time": 1732131473837,
+        "experiment_id": "893771203915828",
+        "lifecycle_stage": "active",
+        "run_id": "afa099dd1b2a4c4ab703f696b5c21a73",
+        "run_name": "fearless-carp-155",
+        "run_uuid": "afa099dd1b2a4c4ab703f696b5c21a73",
+        "start_time": 1732131002051,
+        "status": "FINISHED",
+        "user_id": ""
+    },
+    "data": {
+        "metrics": {
+            "CompetitionMetric": 0.53190394240623,
+            "bias": 1.62968025416078,
+            "mae": 8.902242185342686,
+            "rmse": 12.301208593284837
+        },
+        "params": {
+            "fit": "{'static_features': ['Client', 'Warehouse', 'Product'], 'target_col': 'y', 'time_col': 'ds', 'id_col': 'unique_id', 'h': 3, 'n_windows': 4}",
+            "init": "{'models': {'lgb': ('LGBMRegressor', {'boosting_type': 'gbdt', 'class_weight': None, 'colsample_bytree': 1.0, 'importance_type': 'split', 'learning_rate': 0.057716139846986786, 'max_depth': -1, 'min_child_samples': 20, 'min_child_weight': 0.001, 'min_split_gain': 0.0, 'n_estimators': 300, 'n_jobs': None, 'num_leaves': 256, 'objective': 'tweedie', 'random_state': None, 'reg_alpha': 0.0, 'reg_lambda': 0.0, 'subsample': 1.0, 'subsample_for_bin': 200000, 'subsample_freq': 0, 'verbose': -1, 'tweedie_variance_power': 1.2809771485750954, 'metric': 'mae', 'lambda_l2': 0.5115166072323223, 'lambda_l1': 1.3493074506435034})}, 'freq': 'W-MON', 'lags': [1, 13, 26, 52], 'lag_transforms': {1: [RollingMean(min_samples=1, window_size=52), RollingMean(min_samples=1, window_size=13), RollingQuantile(min_samples=1, p=0.5, window_size=52), RollingQuantile(min_samples=1, p=0.5, window_size=13), ExpandingMean(), SeasonalRollingMean(min_samples=1, season_length=52, window_size=2), SeasonalRollingStd(min_samples=1, season_length=52, window_size=2), SeasonalRollingMax(min_samples=1, season_length=52, window_size=2), SeasonalRollingMin(min_samples=1, season_length=52, window_size=2)], 13: [RollingMean(min_samples=1, window_size=13), RollingQuantile(min_samples=1, p=0.5, window_size=13)]}, 'target_transforms': [], 'date_features': ['day', 'month', 'week', 'year']}",
+            "reference_features": "['ds', 'unique_id', 'y']"
+        },
+        "tags": {
+            "mlflow.databricks.cluster.id": "1028-173547-86hgt6vw",
+            "mlflow.databricks.cluster.info": "{\"cluster_name\":\"Jakub Figura's Cluster\",\"spark_version\":\"15.4.x-scala2.12\",\"node_type_id\":\"Standard_F4\",\"driver_node_type_id\":\"Standard_F4\",\"autotermination_minutes\":120,\"disk_spec\":{},\"num_workers\":0}",
+            "mlflow.databricks.cluster.libraries": "{\"installable\":[{}],\"redacted\":[]}",
+            "mlflow.databricks.gitRepoCommit": "774c4d1bcc9a0bc3cea570de45f24caeb352fbd8",
+            "mlflow.databricks.gitRepoProvider": "gitHub",
+            "mlflow.databricks.gitRepoReference": "development",
+            "mlflow.databricks.gitRepoReferenceType": "branch",
+            "mlflow.databricks.gitRepoRelativePath": "log_and_register_model",
+            "mlflow.databricks.gitRepoStatus": "unknown",
+            "mlflow.databricks.gitRepoUrl": "https://github.com/end-to-end-mlops-databricks/marvelous-databricks-course-jf-lingarian",
+            "mlflow.databricks.notebook.commandID": "1732126184998_6094593359620386053_a560743b1ba84a82beb2fe9302708ef6",
+            "mlflow.databricks.notebookID": "893771203915844",
+            "mlflow.databricks.notebookPath": "/Users/jakub.figura@lingarogroup.com/marvelous-databricks-course-jf-lingarian/log_and_register_model",
+            "mlflow.databricks.notebookRevisionID": "1732131474291",
+            "mlflow.databricks.webappURL": "https://northeurope-c2.azuredatabricks.net",
+            "mlflow.databricks.workspaceID": "1740083184448088",
+            "mlflow.databricks.workspaceURL": "https://adb-1740083184448088.8.azuredatabricks.net",
+            "mlflow.log-model.history": "[{\"artifact_path\":\"model\",\"flavors\":{\"python_function\":{\"model_path\":\"mlforecast-model\",\"loader_module\":\"mlforecast.flavor\",\"python_version\":\"3.11.0\",\"env\":{\"conda\":\"conda.yaml\",\"virtualenv\":\"python_env.yaml\"}},\"mlforecast\":{\"pickled_model\":\"mlforecast-model\",\"mlforecast_version\":\"0.13.5\",\"serialization_format\":\"cloudpickle\",\"code\":null}},\"utc_time_created\":\"2024-11-20 19:37:45.722659\"}]",
+            "mlflow.runColor": "#a46750",
+            "mlflow.runName": "fearless-carp-155",
+            "mlflow.source.name": "/Users/jakub.figura@lingarogroup.com/marvelous-databricks-course-jf-lingarian/log_and_register_model",
+            "mlflow.source.type": "NOTEBOOK",
+            "mlflow.user": "jakub.figura@lingarogroup.com"
+        }
+    },
+    "inputs": {
+        "dataset_inputs": []
+    }
+}

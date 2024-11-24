@@ -9,6 +9,11 @@ from mlforecast.lag_transforms import (
     SeasonalRollingStd,
 )
 
+config_project = {
+    "catalog":"lingaro_sandbox_ne",
+    "schema":"jf_sandbox",
+}
+
 config_model_params = {
     "lgb": {
         "verbose": -1,

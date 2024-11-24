@@ -1,4 +1,6 @@
+# Databricks notebook source
 import json
+import os
 
 import mlflow
 
@@ -7,9 +9,13 @@ mlflow.set_tracking_uri("databricks")
 mlflow.set_experiment(experiment_name="/Shared/vn1-forecasting")
 mlflow.set_experiment_tags({"repository_name": "vn1-forecasting"})
 
+# COMMAND ----------
+
 # Search for experiments with the specified tag
 experiments = mlflow.search_experiments(filter_string="tags.repository_name='vn1-forecasting'")
 print(experiments)
+
+# COMMAND ----------
 
 # Save experiment details to a JSON file
 with open("mlflow_experiment.json", "w") as json_file:

@@ -1,0 +1,15 @@
+{
+    "_experiment_id": "893771203915828",
+    "_name": "/Shared/vn1-forecasting",
+    "_artifact_location": "dbfs:/databricks/mlflow-tracking/893771203915828",
+    "_lifecycle_stage": "active",
+    "_tags": {
+        "mlflow.experiment.sourceName": "/Shared/vn1-forecasting",
+        "mlflow.ownerId": "2362990481192137",
+        "mlflow.ownerEmail": "jakub.figura@lingarogroup.com",
+        "mlflow.experimentType": "MLFLOW_EXPERIMENT",
+        "repository_name": "vn1-forecasting"
+    },
+    "_creation_time": 1732036746345,
+    "_last_update_time": 1732131002051
+}

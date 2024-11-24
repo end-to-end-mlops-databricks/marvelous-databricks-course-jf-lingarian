@@ -1,0 +1,18 @@
+{
+    "_name": "lingaro_sandbox_ne.jf_sandbox.forecasting_model",
+    "_version": "2",
+    "_creation_time": 1732131479736,
+    "_last_updated_timestamp": 1732131481548,
+    "_description": "",
+    "_user_id": "jakub.figura@lingarogroup.com",
+    "_current_stage": null,
+    "_source": "dbfs:/databricks/mlflow-tracking/893771203915828/afa099dd1b2a4c4ab703f696b5c21a73/artifacts/model",
+    "_run_id": "afa099dd1b2a4c4ab703f696b5c21a73",
+    "_run_link": null,
+    "_status": "READY",
+    "_status_message": "",
+    "_tags": {
+        "git_sha": "ffa63b430205ff7"
+    },
+    "_aliases": []
+}
