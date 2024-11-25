@@ -80,7 +80,7 @@ with mlflow.start_run() as run:
     y_pred = mlf.predict(h=3)
 
     # Infer signature
-    signature = infer_signature(model_input={"h":3}, model_output=y_pred)
+    signature = infer_signature(None, y_pred)
 
     # Log model
     mlforecast.flavor.log_model(model=mlf, artifact_path="model", signature=signature)
@@ -121,8 +121,12 @@ model_version_alias = "test"
 client.set_registered_model_alias(model_name, model_version_alias, "1")  
  
 model_uri = f"models:/{model_name}@{model_version_alias}"
-model = mlflow.pyfunc.load_model(model_uri)
+model = mlforecast.flavor.load_model(model_uri=model_uri)
 model
+
+# COMMAND ----------
+
+model.predict(h=3)
 
 # COMMAND ----------
 

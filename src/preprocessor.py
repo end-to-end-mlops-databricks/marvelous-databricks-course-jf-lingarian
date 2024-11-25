@@ -151,7 +151,7 @@ class DataProcessor:
 
             print(f"Data for file {new_data_file_name} has been successfully merged with the preprocessed data")
 
-    def save_to_catalog(self, df_processed: pd.DataFrame, spark: SparkSession):
+    def save_to_catalog(self, spark: SparkSession):
         """
         Save the processed DataFrame into a Databricks table with a timestamp and enable Change Data Feed.
 
@@ -159,6 +159,8 @@ class DataProcessor:
         df_processed (pd.DataFrame): The processed DataFrame to be saved.
         spark (SparkSession): The Spark session to use for saving the DataFrame.
         """
+
+        df_processed = pl.read_parquet(self.preprocessed_data_file_path).to_pandas()
 
         df_processed_with_timestamp = spark.createDataFrame(df_processed).withColumn(
             "update_timestamp_utc", to_utc_timestamp(current_timestamp(), "UTC")
