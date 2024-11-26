@@ -17,16 +17,18 @@ class DataProcessor:
         file_name (str): The name of the file to be processed.
     """
 
-    def __init__(self, file_path: str, file_name: str):
+    def __init__(self, file_path: str, file_name: str, config: dict):
         """
         Initializes the DataProcessor with the specified file path and file name.
 
         Args:
             file_path (str): The path to the directory containing the file.
             file_name (str): The name of the file to be processed.
+            config (dict): The configuration dictionary.
         """
         self.file_path = file_path
         self.file_name = file_name
+        self.config = config
         self.preprocessed_data_file_path = f"data/preprocessed/{file_name}.parquet"
 
     def process_files(self):
@@ -37,13 +39,12 @@ class DataProcessor:
         and calls the merge_new_data_with_preprocessed_data method for each matching file.
         """
         # List all files in the specified directory
-        files = os.listdir(self.file_path)
+        self.files = os.listdir(self.file_path)
 
         # Filter and process the names of .csv files
-        for file in files:
+        for file in self.files:
             if file.startswith(self.file_name) and file.endswith(".csv"):
-                print(file)
-                self.merge_new_data_with_preprocessed_data(file)
+                self.merge_new_data_with_preprocessed_data(new_data_file_name=file, original_cat_cols=["Client", "Warehouse", "Product"])
         return pl.read_parquet(self.preprocessed_data_file_path)
 
     def prepare_raw_csv(self, df: pl.DataFrame) -> pl.DataFrame:
@@ -104,12 +105,16 @@ class DataProcessor:
             original_cat_cols = ["Client", "Warehouse", "Product"]
 
         # Read new file
-        new_df = pl.read_csv(f"data/raw/{new_data_file_name}").with_columns(
-            [
-                pl.col("Client").cast(pl.String).cast(pl.Categorical),
-                pl.col("Warehouse").cast(pl.String).cast(pl.Categorical),
-                pl.col("Product").cast(pl.String).cast(pl.Categorical),
-            ]
+        print(f"{self.file_path}/{new_data_file_name}")
+
+        new_df = (
+          pl.from_pandas(pd.read_csv(f"{self.file_path}/{new_data_file_name}")).with_columns(
+              [
+                  pl.col("Client").cast(pl.String).cast(pl.Categorical),
+                  pl.col("Warehouse").cast(pl.String).cast(pl.Categorical),
+                  pl.col("Product").cast(pl.String).cast(pl.Categorical),
+              ]
+          )
         )
 
         # Read the preprocessed data
@@ -166,11 +171,28 @@ class DataProcessor:
             "update_timestamp_utc", to_utc_timestamp(current_timestamp(), "UTC")
         )
 
-        df_processed_with_timestamp.write.mode("append").saveAsTable(
-            f"{self.config.catalog_name}.{self.config.schema_name}.processed_data"
+        # Explicitly cast columns to the correct data types
+        df_processed_with_timestamp = df_processed_with_timestamp.selectExpr(
+            "cast(Client as string) as Client",
+            "cast(Warehouse as string) as Warehouse",
+            "cast(Product as string) as Product",
+            "cast(ds as date) as ds",
+            "cast(y as double) as y",
+            "cast(unique_id as string) as unique_id",
+            "update_timestamp_utc"
+        )
+
+        df_processed_with_timestamp = df_processed_with_timestamp.withColumn("ds", df_processed_with_timestamp["ds"].cast("date"))
+
+        df_processed_with_timestamp.write.mode("overwrite").option("overwriteSchema", "true").saveAsTable(
+            f"{self.config['catalog']}.{self.config['schema']}.processed_data"
         )
 
         spark.sql(
-            f"ALTER TABLE {self.config.catalog_name}.{self.config.schema_name}.processed_data "
+            f"ALTER TABLE {self.config['catalog']}.{self.config['schema']}.processed_data "
             "SET TBLPROPERTIES (delta.enableChangeDataFeed = true);"
         )
+
+        print(" ")
+        print("Successfuly Saved")
+        print(" ")

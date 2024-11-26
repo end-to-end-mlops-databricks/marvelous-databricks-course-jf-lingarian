@@ -12,6 +12,9 @@ from mlforecast.lag_transforms import (
 config_project = {
     "catalog":"lingaro_sandbox_ne",
     "schema":"jf_sandbox",
+    "use_price":False,
+    "sales_path":"data/raw/sales",
+    "price_path":"data/raw/price"
 }
 
 config_model_params = {

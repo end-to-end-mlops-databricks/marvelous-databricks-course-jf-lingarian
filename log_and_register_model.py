@@ -31,8 +31,8 @@ schema_name = config_project['schema']
 spark = SparkSession.builder.getOrCreate()
 
 # Load preprocessed dataset and convert to pandas
-df_spark = spark.table(f"{catalog_name}.{schema_name}.processed_data")
-df = df_spark.toPandas()
+df_spark = spark.table(f"{catalog_name}.{schema_name}.processed_data_sales")
+df = df_spark.toPandas().assign(ds=lambda df: pd.to_datetime(df['ds']))
 df
 
 # COMMAND ----------
@@ -40,6 +40,10 @@ df
 # Extract configuration details
 static_features = config["fit"]["static_features"]
 reference_features = config["reference_features"]
+
+# Convert object cols into integers
+for col in config['fit']['static_features']:
+  df[col] = df[col].astype(int)
 
 # Initialize the forecast model
 mlf = MLForecast(**config["init"])
@@ -100,6 +104,10 @@ with open("run_info.json", "w") as json_file:
 # Print metrics and parameters from the run information
 print(run_info["data"]["metrics"])
 print(run_info["data"]["params"])
+
+# COMMAND ----------
+
+run_info
 
 # COMMAND ----------
 
